@@ -1,21 +1,24 @@
 import openai
-# to get proper authentication, make sure to use a valid key that's listed in
-# the --api-keys flag. if no flag value is provided, the `api_key` will be ignored.
-openai.api_key = "EMPTY"
-openai.api_base = "http://localhost:8000/v1"
 
-model = "vicuna-7b-v1.5"
-prompt = "Once upon a time"
+def main():
+    openai.api_key = "YOUR_API_KEY"  # Replace with your actual OpenAI API key
+    openai.api_base = "https://api.openai.com/v1"  # Use the correct API endpoint
 
-# create a completion
-completion = openai.Completion.create(model=model, prompt=prompt, max_tokens=64)
-# print the completion
-print(prompt + completion.choices[0].text)
+    model = "vicuna-7b-v1.5"
+    prompt = "Once upon a time"
 
-# create a chat completion
-completion = openai.ChatCompletion.create(
-  model=model,
-  messages=[{"role": "user", "content": "Hello! What is your name?"}]
-)
-# print the completion
-print(completion.choices[0].message.content)
+    # Create a completion
+    completion = openai.Completion.create(model=model, prompt=prompt, max_tokens=64)
+    # Print the completion
+    print(prompt + completion.choices[0].text)
+
+    # Create a chat completion
+    completion = openai.ChatCompletion.create(
+        model=model,
+        messages=[{"role": "user", "content": "Hello! What is your name?"}]
+    )
+    # Print the completion
+    print(completion.choices[0].message["content"])
+
+if __name__ == "__main__":
+    main()
